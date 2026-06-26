@@ -1,0 +1,82 @@
+[
+  {
+    "codigo": "MAT-001",
+    "nombre": "Cemento Portland",
+    "categoria": "Construcción",
+    "precio": 12.50,
+    "stock": 150,
+    "unidad": "saco 50kg",
+    "descripcion": "Cemento de alta resistencia para obras civiles y construcciones en general.",
+    "proveedor": "CementoEcuador S.A."
+  },
+  {
+    "codigo": "MAT-002",
+    "nombre": "Varilla de Acero 12mm",
+    "categoria": "Metales",
+    "precio": 8.75,
+    "stock": 200,
+    "unidad": "unidad 6m",
+    "descripcion": "Varilla corrugada de acero para refuerzo en estructuras de hormigón armado.",
+    "proveedor": "Acerías del Ecuador"
+  },
+  {
+    "codigo": "MAT-003",
+    "nombre": "Tablón de Madera Pino",
+    "categoria": "Madera",
+    "precio": 6.00,
+    "stock": 80,
+    "unidad": "unidad 3m",
+    "descripcion": "Tablón de madera de pino tratado, ideal para encofrados y acabados.",
+    "proveedor": "Maderería Nacional"
+  },
+  {
+    "codigo": "MAT-004",
+    "nombre": "Pintura Látex Blanca",
+    "categoria": "Acabados",
+    "precio": 18.90,
+    "stock": 60,
+    "unidad": "galón",
+    "descripcion": "Pintura látex de primera calidad, lavable y de larga duración para interiores.",
+    "proveedor": "Pinturas Cóndor"
+  },
+  {
+    "codigo": "MAT-005",
+    "nombre": "Tubo PVC 4 pulgadas",
+    "categoria": "Plomería",
+    "precio": 5.20,
+    "stock": 120,
+    "unidad": "tubo 3m",
+    "descripcion": "Tubo de PVC para instalaciones sanitarias y desagüe, presión nominal 6.",
+    "proveedor": "Plastigama"
+  },
+  {
+    "codigo": "MAT-006",
+    "nombre": "Bloque de Hormigón 15x20x40",
+    "categoria": "Construcción",
+    "precio": 0.55,
+    "stock": 3000,
+    "unidad": "unidad",
+    "descripcion": "Bloque estándar de hormigón vibrado para muros de carga y divisiones.",
+    "proveedor": "Bloquera El Constructor"
+  },
+  {
+    "codigo": "MAT-007",
+    "nombre": "Cable Eléctrico THHN 12AWG",
+    "categoria": "Eléctrico",
+    "precio": 0.95,
+    "stock": 500,
+    "unidad": "metro",
+    "descripcion": "Cable de cobre sólido con aislamiento THHN para instalaciones eléctricas residenciales.",
+    "proveedor": "Electrocables Ecuador"
+  },
+  {
+    "codigo": "MAT-008",
+    "nombre": "Cerámica 30x30 cm",
+    "categoria": "Acabados",
+    "precio": 9.80,
+    "stock": 250,
+    "unidad": "caja x 10 piezas",
+    "descripcion": "Cerámica esmaltada para pisos y paredes, resistente al agua y al desgaste.",
+    "proveedor": "Graiman"
+  }
+]

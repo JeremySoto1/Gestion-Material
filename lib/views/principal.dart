@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'catalogo.dart';
 
 class PrincipalPage extends StatefulWidget {
   const PrincipalPage({super.key});
@@ -32,12 +33,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
       ),
     ),
 
-    const Center(
-      child: Text(
-        "CATÁLOGO",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    ),
+    const CatalogoPage(),
 
     const Center(
       child: Text(
@@ -47,9 +43,26 @@ class _PrincipalPageState extends State<PrincipalPage> {
     ),
   ];
 
+  static const List<String> _titulos = [
+    'CONTROL DE USUARIO',
+    'ENTRADA DE MATERIAL',
+    'INVENTARIO',
+    'CATÁLOGO DE MATERIALES',
+    'REPORTES',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFCFD8DC),
+      appBar: AppBar(
+        title: Text(
+          _titulos[currentPageIndex],
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        backgroundColor: const Color(0xFF37474F),
+        centerTitle: true,
+      ),
       body: paginas[currentPageIndex],
 
       bottomNavigationBar: NavigationBar(
