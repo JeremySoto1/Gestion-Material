@@ -12,7 +12,6 @@ class PrincipalPage extends StatefulWidget {
 class _PrincipalPageState extends State<PrincipalPage> {
   int currentPageIndex = 0;
 
-  // GlobalKey para acceder a los métodos públicos de InventarioPage
   final GlobalKey<InventarioPageState> inventarioKey =
       GlobalKey<InventarioPageState>();
 
@@ -49,16 +48,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
     ];
   }
 
-  /// Acceso externo: registrar una entrada de material en el inventario.
-  /// Ejemplo de uso desde otra vista:
-  ///   inventarioKey.currentState?.registrarEntrada('MAT-001', 50, 'Edificio Central');
   bool registrarEntradaMaterial(String codigo, int cantidad, String obra) {
     return inventarioKey.currentState?.registrarEntrada(codigo, cantidad, obra) ?? false;
   }
-
-  /// Acceso externo: registrar una salida de material del inventario.
-  /// Ejemplo de uso desde otra vista:
-  ///   inventarioKey.currentState?.registrarSalida('MAT-001', 10);
   bool registrarSalidaMaterial(String codigo, int cantidad) {
     return inventarioKey.currentState?.registrarSalida(codigo, cantidad) ?? false;
   }
