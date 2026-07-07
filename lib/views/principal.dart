@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'catalogo.dart';
+import 'inventario.dart';
 
 class PrincipalPage extends StatefulWidget {
   const PrincipalPage({super.key});
@@ -11,37 +12,56 @@ class PrincipalPage extends StatefulWidget {
 class _PrincipalPageState extends State<PrincipalPage> {
   int currentPageIndex = 0;
 
-  final List<Widget> paginas = [
-    const Center(
-      child: Text(
-        "CONTROL DE USUARIO",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    ),
+  // GlobalKey para acceder a los métodos públicos de InventarioPage
+  final GlobalKey<InventarioPageState> inventarioKey =
+      GlobalKey<InventarioPageState>();
 
-    const Center(
-      child: Text(
-        "ENTRADA MATERIAL",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    ),
+  late final List<Widget> paginas;
 
-    const Center(
-      child: Text(
-        "INVENTARIO",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+  @override
+  void initState() {
+    super.initState();
+    paginas = [
+      const Center(
+        child: Text(
+          "CONTROL DE USUARIO",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
       ),
-    ),
 
-    const CatalogoPage(),
-
-    const Center(
-      child: Text(
-        "REPORTES",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      const Center(
+        child: Text(
+          "ENTRADA MATERIAL",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
       ),
-    ),
-  ];
+
+      InventarioPage(key: inventarioKey),
+
+      const CatalogoPage(),
+
+      const Center(
+        child: Text(
+          "REPORTES",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ),
+    ];
+  }
+
+  /// Acceso externo: registrar una entrada de material en el inventario.
+  /// Ejemplo de uso desde otra vista:
+  ///   inventarioKey.currentState?.registrarEntrada('MAT-001', 50, 'Edificio Central');
+  bool registrarEntradaMaterial(String codigo, int cantidad, String obra) {
+    return inventarioKey.currentState?.registrarEntrada(codigo, cantidad, obra) ?? false;
+  }
+
+  /// Acceso externo: registrar una salida de material del inventario.
+  /// Ejemplo de uso desde otra vista:
+  ///   inventarioKey.currentState?.registrarSalida('MAT-001', 10);
+  bool registrarSalidaMaterial(String codigo, int cantidad) {
+    return inventarioKey.currentState?.registrarSalida(codigo, cantidad) ?? false;
+  }
 
   static const List<String> _titulos = [
     'CONTROL DE USUARIO',
