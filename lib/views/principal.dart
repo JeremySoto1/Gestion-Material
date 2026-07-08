@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'uso_material.dart';
 import 'catalogo.dart';
 import 'inventario.dart';
 
@@ -45,6 +46,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
+
+      // === CAMBIO 1: nueva página agregada al final ===
+      UsoMaterialPage(onRegistrarSalida: registrarSalidaMaterial),
     ];
   }
 
@@ -61,6 +65,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
     'INVENTARIO',
     'CATÁLOGO DE MATERIALES',
     'REPORTES',
+    'USO DE MATERIAL', // === CAMBIO 2: nuevo título ===
   ];
 
   @override
@@ -75,7 +80,14 @@ class _PrincipalPageState extends State<PrincipalPage> {
         backgroundColor: const Color(0xFF37474F),
         centerTitle: true,
       ),
-      body: paginas[currentPageIndex],
+
+      // === CAMBIO 4: IndexedStack en vez de paginas[currentPageIndex] ===
+      // Mantiene todas las páginas "vivas" en memoria al cambiar de pestaña,
+      // para que inventarioKey.currentState nunca sea null.
+      body: IndexedStack(
+        index: currentPageIndex,
+        children: paginas,
+      ),
 
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentPageIndex,
@@ -93,6 +105,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
           ),
           NavigationDestination(icon: Icon(Icons.menu_book), label: "Catálogo"),
           NavigationDestination(icon: Icon(Icons.bar_chart), label: "Reportes"),
+          // === CAMBIO 3: nuevo destino en la barra de navegación ===
+          NavigationDestination(icon: Icon(Icons.build), label: "Uso"),
         ],
       ),
     );
