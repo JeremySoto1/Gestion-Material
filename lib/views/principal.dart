@@ -3,6 +3,7 @@ import 'uso_material.dart';
 import 'catalogo.dart';
 import 'inventario.dart';
 import 'entrada_material.dart';
+import 'reportes_page.dart';
 
 class PrincipalPage extends StatefulWidget {
   const PrincipalPage({super.key});
@@ -41,12 +42,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
       const CatalogoPage(),
 
-      const Center(
-        child: Text(
-          "REPORTES",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-      ),
+      const ReportesPage(),
 
       UsoMaterialPage(
         key: usoMaterialKey,
@@ -56,15 +52,21 @@ class _PrincipalPageState extends State<PrincipalPage> {
   }
 
   bool registrarEntradaMaterial(String codigo, int cantidad, String obra) {
-    final res = inventarioKey.currentState?.registrarEntrada(codigo, cantidad, obra) ?? false;
+    final res =
+        inventarioKey.currentState?.registrarEntrada(codigo, cantidad, obra) ??
+        false;
     _sincronizarInventario();
     return res;
   }
+
   bool registrarSalidaMaterial(String codigo, int cantidad, String obra) {
-    final res = inventarioKey.currentState?.registrarSalida(codigo, cantidad, obra) ?? false;
+    final res =
+        inventarioKey.currentState?.registrarSalida(codigo, cantidad, obra) ??
+        false;
     _sincronizarInventario();
     return res;
   }
+
   bool revertirEntradaMaterial(String codigo, int cantidad, String obra) {
     inventarioKey.currentState?.forzarAjusteStock(codigo, cantidad, obra);
     _sincronizarInventario();
@@ -94,16 +96,16 @@ class _PrincipalPageState extends State<PrincipalPage> {
       appBar: AppBar(
         title: Text(
           _titulos[currentPageIndex],
-          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         backgroundColor: const Color(0xFF37474F),
         centerTitle: true,
       ),
 
-      body: IndexedStack(
-        index: currentPageIndex,
-        children: paginas,
-      ),
+      body: IndexedStack(index: currentPageIndex, children: paginas),
 
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentPageIndex,

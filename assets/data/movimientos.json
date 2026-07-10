@@ -1,0 +1,50 @@
+[
+  {
+    "codigo": "MAT-001",
+    "tipo": "SALIDA",
+    "cantidad": 25,
+    "fecha": "2026-07-01",
+    "obra": "Edificio Central - Quito",
+    "uso": "Fundición de columnas"
+  },
+  {
+    "codigo": "MAT-002",
+    "tipo": "SALIDA",
+    "cantidad": 150,
+    "fecha": "2026-07-02",
+    "obra": "Puente Río Guayas - Guayaquil",
+    "uso": "Construcción de vigas"
+  },
+  {
+    "codigo": "MAT-003",
+    "tipo": "SALIDA",
+    "cantidad": 12,
+    "fecha": "2026-07-04",
+    "obra": "Residencial Los Ceibos - Cuenca",
+    "uso": "Encofrado"
+  },
+  {
+    "codigo": "MAT-001",
+    "tipo": "ENTRADA",
+    "cantidad": 100,
+    "fecha": "2026-07-05",
+    "obra": "Bodega Central",
+    "uso": "Compra al proveedor"
+  },
+  {
+    "codigo": "MAT-004",
+    "tipo": "SALIDA",
+    "cantidad": 20,
+    "fecha": "2026-07-06",
+    "obra": "Edificio Central - Quito",
+    "uso": "Pintura de paredes"
+  },
+  {
+    "codigo": "MAT-005",
+    "tipo": "SALIDA",
+    "cantidad": 30,
+    "fecha": "2026-07-07",
+    "obra": "Urbanización La Joya",
+    "uso": "Instalación sanitaria"
+  }
+]
