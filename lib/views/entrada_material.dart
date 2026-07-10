@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class EntradaMaterialPage extends StatefulWidget {
   final bool Function(String codigo, int cantidad, String obra) onRegistrarEntrada;
-  final bool Function(String codigo, int cantidad) onReverseEntrada;
+  final bool Function(String codigo, int cantidad, String obra) onReverseEntrada;
 
   const EntradaMaterialPage({
     super.key,
@@ -301,7 +301,7 @@ class _EntradaMaterialPageState extends State<EntradaMaterialPage> {
                             codigoSeleccionado!, diferencia, obra);
                       } else if (diferencia < 0) {
                         widget.onReverseEntrada(
-                            codigoSeleccionado!, -diferencia);
+                            codigoSeleccionado!, -diferencia, obra);
                       }
 
                       setState(() {
@@ -358,7 +358,7 @@ class _EntradaMaterialPageState extends State<EntradaMaterialPage> {
 
     if (confirmado == true) {
       widget.onReverseEntrada(
-          entrada['codigo'], entrada['cantidad'] as int);
+          entrada['codigo'], entrada['cantidad'] as int, entrada['obra'] as String);
       setState(() => entradas.removeAt(index));
       _mostrarSnackBar(
           'Entrada de "${entrada['nombre']}" eliminada');

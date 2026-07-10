@@ -45,26 +45,39 @@ class InventarioPageState extends State<InventarioPage> {
   }
 
   bool registrarEntrada(String codigo, int cantidad, String obra) {
-    final index = inventario.indexWhere((m) => m['codigo'] == codigo);
-    if (index == -1) {
-      _mostrarSnackBar('Material con código $codigo no encontrado',
+    // Verificar primero si el código existe en el catálogo
+    final infoCatalogo = _buscarEnCatalogo(codigo);
+    if (infoCatalogo == null) {
+      _mostrarSnackBar('Material con código $codigo no encontrado en el catálogo',
           esError: true);
       return false;
     }
 
+    // Buscar si ya hay un registro para este código en esta misma obra
+    final index = inventario.indexWhere(
+        (m) => m['codigo'] == codigo && m['obra'] == obra);
+
     setState(() {
-      inventario[index]['stock'] =
-          (inventario[index]['stock'] as int) + cantidad;
-      inventario[index]['obra'] = obra;
+      if (index == -1) {
+        // Si no existe, crear un nuevo registro en el inventario
+        inventario.add({
+          'codigo': codigo,
+          'stock': cantidad,
+          'obra': obra,
+        });
+      } else {
+        // Si ya existe, sumar al stock
+        inventario[index]['stock'] =
+            (inventario[index]['stock'] as int) + cantidad;
+      }
     });
 
-    final infoCatalogo = _buscarEnCatalogo(codigo);
-    final nombre = infoCatalogo?['nombre'] ?? codigo;
+    final nombre = infoCatalogo['nombre'] ?? codigo;
     _mostrarSnackBar('Entrada registrada: +$cantidad de $nombre en $obra');
     return true;
   }
-  void forzarAjusteStock(String codigo, int cantidad) {
-    final index = inventario.indexWhere((m) => m['codigo'] == codigo);
+  void forzarAjusteStock(String codigo, int cantidad, String obra) {
+    final index = inventario.indexWhere((m) => m['codigo'] == codigo && m['obra'] == obra);
     if (index == -1) return;
     setState(() {
       inventario[index]['stock'] =
@@ -72,10 +85,10 @@ class InventarioPageState extends State<InventarioPage> {
     });
   }
 
-  bool registrarSalida(String codigo, int cantidad) {
-    final index = inventario.indexWhere((m) => m['codigo'] == codigo);
+  bool registrarSalida(String codigo, int cantidad, String obra) {
+    final index = inventario.indexWhere((m) => m['codigo'] == codigo && m['obra'] == obra);
     if (index == -1) {
-      _mostrarSnackBar('Material con código $codigo no encontrado',
+      _mostrarSnackBar('Material con código $codigo no encontrado en la obra $obra',
           esError: true);
       return false;
     }
@@ -94,7 +107,7 @@ class InventarioPageState extends State<InventarioPage> {
 
     final infoCatalogo = _buscarEnCatalogo(codigo);
     final nombre = infoCatalogo?['nombre'] ?? codigo;
-    _mostrarSnackBar('Salida registrada: -$cantidad de $nombre');
+    _mostrarSnackBar('Salida registrada: -$cantidad de $nombre en $obra');
     return true;
   }
 

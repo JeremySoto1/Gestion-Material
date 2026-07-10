@@ -10,15 +10,15 @@ import 'package:flutter/services.dart';
 class UsoMaterialPage extends StatefulWidget {
   /// Debe devolver true si la salida se registró correctamente
   /// (ej: PrincipalPage.registrarSalidaMaterial).
-  final bool Function(String codigo, int cantidad) onRegistrarSalida;
+  final bool Function(String codigo, int cantidad, String obra) onRegistrarSalida;
 
   const UsoMaterialPage({super.key, required this.onRegistrarSalida});
 
   @override
-  State<UsoMaterialPage> createState() => _UsoMaterialPageState();
+  State<UsoMaterialPage> createState() => UsoMaterialPageState();
 }
 
-class _UsoMaterialPageState extends State<UsoMaterialPage>
+class UsoMaterialPageState extends State<UsoMaterialPage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
@@ -67,6 +67,15 @@ class _UsoMaterialPageState extends State<UsoMaterialPage>
           .map((e) => Map<String, dynamic>.from(e as Map))
           .toList();
       cargando = false;
+    });
+  }
+
+  void actualizarInventario(List<Map<String, dynamic>> nuevoInventario) {
+    if (!mounted) return;
+    setState(() {
+      inventario = nuevoInventario
+          .map((e) => Map<String, dynamic>.from(e as Map))
+          .toList();
     });
   }
 
@@ -261,8 +270,9 @@ class _UsoMaterialPageState extends State<UsoMaterialPage>
                       return;
                     }
 
+                    final obra = itemInventario['obra'] as String? ?? '';
                     final exito =
-                    widget.onRegistrarSalida(codigo, cantidad);
+                    widget.onRegistrarSalida(codigo, cantidad, obra);
 
                     if (exito) {
                       setState(() {

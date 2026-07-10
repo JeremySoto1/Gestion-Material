@@ -16,6 +16,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
   final GlobalKey<InventarioPageState> inventarioKey =
       GlobalKey<InventarioPageState>();
+  final GlobalKey<UsoMaterialPageState> usoMaterialKey =
+      GlobalKey<UsoMaterialPageState>();
 
   late final List<Widget> paginas;
 
@@ -46,19 +48,34 @@ class _PrincipalPageState extends State<PrincipalPage> {
         ),
       ),
 
-      UsoMaterialPage(onRegistrarSalida: registrarSalidaMaterial),
+      UsoMaterialPage(
+        key: usoMaterialKey,
+        onRegistrarSalida: registrarSalidaMaterial,
+      ),
     ];
   }
 
   bool registrarEntradaMaterial(String codigo, int cantidad, String obra) {
-    return inventarioKey.currentState?.registrarEntrada(codigo, cantidad, obra) ?? false;
+    final res = inventarioKey.currentState?.registrarEntrada(codigo, cantidad, obra) ?? false;
+    _sincronizarInventario();
+    return res;
   }
-  bool registrarSalidaMaterial(String codigo, int cantidad) {
-    return inventarioKey.currentState?.registrarSalida(codigo, cantidad) ?? false;
+  bool registrarSalidaMaterial(String codigo, int cantidad, String obra) {
+    final res = inventarioKey.currentState?.registrarSalida(codigo, cantidad, obra) ?? false;
+    _sincronizarInventario();
+    return res;
   }
-  bool revertirEntradaMaterial(String codigo, int cantidad) {
-    inventarioKey.currentState?.forzarAjusteStock(codigo, cantidad);
+  bool revertirEntradaMaterial(String codigo, int cantidad, String obra) {
+    inventarioKey.currentState?.forzarAjusteStock(codigo, cantidad, obra);
+    _sincronizarInventario();
     return true;
+  }
+
+  void _sincronizarInventario() {
+    final inventarioActual = inventarioKey.currentState?.inventario;
+    if (inventarioActual != null) {
+      usoMaterialKey.currentState?.actualizarInventario(inventarioActual);
+    }
   }
 
   static const List<String> _titulos = [
