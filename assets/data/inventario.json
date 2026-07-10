@@ -1,0 +1,17 @@
+[
+  {
+    "codigo": "MAT-001",
+    "stock": 180,
+    "obra": "Edificio Central - Quito"
+  },
+  {
+    "codigo": "MAT-002",
+    "stock": 50,
+    "obra": "Puente Río Guayas - Guayaquil"
+  },
+  {
+    "codigo": "MAT-003",
+    "stock": 30,
+    "obra": "Residencial Los Ceibos - Cuenca"
+  }
+]
